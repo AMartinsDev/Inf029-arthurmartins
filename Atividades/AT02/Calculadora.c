@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 
-int somar(int x, int y, int result);
-int subtrair(int x, int y, int result);
-int multiplicar(int x, int y, int result);
-int dividir(int x, int y, int result);
+int somar(int x, int y);
+int subtrair(int x, int y);
+int multiplicar(int x, int y);
+int dividir(int x, int y);
 
 int main()
 {
@@ -26,7 +26,7 @@ int main()
 			printf("Digite o primeiro numero a ser somado:\n");scanf("%d", &num1);
     		fflush(stdin);
     		printf("Digite o segundo numero a ser somado:\n"); scanf("%d", &num2);	
-			result = somar(num1,num2, result);
+			result = somar(num1, num2);
 			printf("O resultado da soma eh: %d \n", result);
 			break;
 
@@ -34,7 +34,7 @@ int main()
 			printf("Digite o primeiro numero a ser subtraido:\n"); scanf("%d", &num1);
     		fflush(stdin);
     		printf("Digite o segundo numero a ser subtraido:\n"); scanf("%d", &num2);		
-			result = subtrair(num1,num2, result);
+			result = subtrair(num1, num2);
 			printf("O resultado da subtracao eh: %d \n", result);
 			break;
 			
@@ -42,7 +42,7 @@ int main()
 			printf("Digite o primeiro numero a ser multiplicado:\n"); scanf("%d", &num1);
     		fflush(stdin);
     		printf("Digite o segundo numero a ser multiplicado:\n"); scanf("%d", &num2);		
-			result = multiplicar(num1,num2, result);
+			result = multiplicar(num1, num2);
 			printf("O resultado da multiplicacao eh: %d \n", result);
 			break;
 
@@ -50,7 +50,7 @@ int main()
 			printf("Digite o primeiro numero a ser dividido:\n"); scanf("%d", &num1);
     		fflush(stdin);
     		printf("Digite o segundo numero a ser dividido:\n"); scanf("%d", &num2);		
-			result = dividir(num1,num2, result);
+			result = dividir(num1, num2);
 			printf("O resultado da divisao eh: %d \n", result);
 			break;
 			
@@ -62,29 +62,33 @@ int main()
 	return 0;
 }
 
-int somar(int x, int y, int result)
+int somar(int x, int y)
 {
+	int result;
     result = x + y;
 
     return result;
 }
 
-int subtrair(int x, int y, int result)
+int subtrair(int x, int y)
 {	
+	int result;
 	result = x - y;
 
 	return result;
 }
 
-int multiplicar(int x, int y, int result)
-{
+int multiplicar(int x, int y)
+{	
+	int result;
 	result = x * y;
 	
 	return result;
 }
 
-int dividir(int x, int y, int result)
-{
+int dividir(int x, int y)
+{	
+	int result;
 	result = x/y; 
 
 	return result;
