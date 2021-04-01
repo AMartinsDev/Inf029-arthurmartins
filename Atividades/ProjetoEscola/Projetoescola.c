@@ -19,6 +19,39 @@ void Inserir();
 void InserirAluno();
 void InserirProfessor();
 
+//Declaração de funções do menu de exclusão
+void ExcluirAluno();
+void ExcluirProfessor();
+void ExcluirAlunoDisc();
+void ExcluirDisciplina();
+
+//Declaração de funções para atualização de cadastro
+
+void AtualizarProfessor();
+void AtualizarAluno();
+void AtualizarDisciplina();
+
+//Struct para cadastro de alunos
+struct CadastroAluno
+{
+    int Matricula;
+    int Sexo;
+    int Cpf;
+    char Nome[30];
+
+}Aluno;
+
+//Struct para cadastro de professores
+
+struct CadastroProfessor
+{
+    int Matricula;
+    int Sexo;
+    int Cpf;
+    char Nome [30];
+
+}Professor;
+
 
 
 int main(void)
