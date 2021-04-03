@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define MAX 10
+#define MAX 5
 
 //Declaração de funções do menu de cadastro
 void Cadastrar();
@@ -45,9 +45,8 @@ struct CadastroNascimento
 //Struct para cadastro de alunos
 struct CadastroAluno
 {
-    char Nome[30], Matricula[10];
+    char Nome[30], Matricula[10], Cpf[11];
     int Sexo;
-    int Cpf;
     int Flag1, Flag2;
     struct CadastroNascimento Nascimento;
     
@@ -56,9 +55,8 @@ struct CadastroAluno
 //Struct para cadastro de professores
 struct CadastroProfessor
 {
-    char Nome [30], Matricula[10];
+    char Nome [30], Matricula[10], Cpf[11];
     int Sexo;
-    int Cpf;
     int Flag1, Flag2;
     struct CadastroNascimento Nascimento;
 
@@ -75,8 +73,7 @@ struct CadastroDisciplina
 
 
 
-//BlOCO MAIN (Principal), INTERAÇÃO DO PROGRAMA
-
+//BlOCO MAIN (Menu Principal)
 int main(void)
 {
 
@@ -92,7 +89,7 @@ int main(void)
         printf("\n Digite 3 Para Listar:\n");
         printf("\n Digite 4 Para Atualizar:\n");
         printf("\n Digite 5 Para Excluir:\n");
-        printf("\n Digite 0 Para Sair:\n");
+        printf("\n Digite 0 Para Encerrar:\n");
 
         scanf("%d", &opcao);
         getchar();
@@ -100,7 +97,7 @@ int main(void)
         switch(opcao){
             
             case 1:
-            //Cadastrar();
+            Cadastrar();
             break;
 
             case 2:
@@ -119,9 +116,6 @@ int main(void)
             //Excluir();
             break;
 
-            default:
-            printf("\nOpcao Invalida\n");
-            break;
         }
         getchar();
 
@@ -129,3 +123,110 @@ int main(void)
     
     return 0;
 }
+
+
+//Função Cadastro
+void Cadastrar(){
+
+     int opcao;
+
+        do
+        {
+            system("Cls");
+
+            printf("\n -----Bem Vindo Ao Sistema De Cadastramento-----\n");
+            printf("\n Digite 1 Para Cadastrar Aluno:\n");
+            printf("\n Digite 2 Para Cadastrar Professor:\n");
+            printf("\n Digite 3 Para Cadastrar Disciplina:\n");
+            printf("\n Digite 0 Para Encerrar:\n");
+
+            scanf("%d", &opcao);
+            getchar();
+
+            switch(opcao){
+            
+            case 1:
+            CadastrarAluno();
+            break;
+
+            case 2:
+            //CadastrarProfessor();
+            break;
+
+            case 3:
+            //CadastrarDisciplina();
+            break;
+
+            }
+            getchar();
+
+        }while(opcao != 0);
+}
+
+
+//Função CadastrarAluno - Subloco da função Cadastrar
+
+void CadastrarAluno()
+{
+
+    int opcao, i, cont;
+
+    do
+    {
+        system("Cls");
+
+        for(i=0; i<MAX; i++)
+        {
+            if(Aluno[i].Flag1 == 0){
+
+                printf("\nNome: ");
+		        fgets(Aluno[i].Nome, sizeof(Aluno[i].Nome), stdin);
+                printf("\nMatricula: ");
+		        fgets(Aluno[i].Matricula, sizeof(Aluno[i].Matricula), stdin);
+
+                printf("\nCPF: ");
+		        fgets(Aluno[i].Cpf, sizeof(Aluno[i].Cpf), stdin);
+
+                int cont=0;
+
+                while(Aluno[i].Cpf[cont] != '\0'){
+                cont++;
+                    
+                    if(cont>11)
+                    {
+                    printf("\n CPF INVALIDO\n");
+                    }
+
+                    while(cont>11)
+                    {
+                        printf("\nCPF: ");
+		                fgets(Aluno[i].Cpf, sizeof(Aluno[i].Cpf), stdin);
+                    }
+                }
+                
+                
+                printf("Sexo: \n1-Masculino\n \n2-Feminino\n \n3-Outros\n");
+                scanf("%d", &Aluno[i].Sexo);
+                fflush(stdin);
+
+                while((Aluno[i].Sexo < 1) || (Aluno[i].Sexo > 3)){
+                    printf("\nOpcao invalida\n");
+                    printf("Sexo: \n1-Masculino\n \n2-Feminino\n \n3-Outros\n");
+                    scanf("%d", &Aluno[i].Sexo);
+                    getchar();
+                }
+
+                printf("\nData de nascimento\n");
+                printf("\nDia: ");
+                scanf("%d", &Aluno[i].Nascimento.Dia);
+                printf("\nMes: ");
+                scanf("%d", &Aluno[i].Nascimento.Mes);
+                printf("\nAno: ");
+                scanf("%d", &Aluno[i].Nascimento.Ano);
+            }
+        }
+
+    }while(opcao != 0);
+}
+
+ 
