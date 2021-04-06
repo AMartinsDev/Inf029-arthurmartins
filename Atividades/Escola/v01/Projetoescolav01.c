@@ -463,7 +463,7 @@ void CadastrarDisciplina()
     }while(opcao != 0);
 }//FIM DA FUNÇÃO CADASTRAR DISCIPLINA
 
-
+ 
 
 //MENU DE INSERÇÃO
 void Inserir(){
@@ -480,7 +480,7 @@ void Inserir(){
 		scanf("%d", &opcao);
         fflush(stdin);
 
-		switch(op){
+		switch(opcao){
 			case 1:
 				InserirAluno();
 			break;
@@ -525,7 +525,8 @@ void InserirAluno(){
 			}
 		}
 		printf("\n1 - Inserir outra\n0 - Sair\n");
-		scanf("%d", &opcao, stdin);
+		scanf("%d", &opcao);
+        fflush(stdin);
 	}while(opcao!=0);
 }//FIM DA FUNÇÃO INSERIR ALUNO EM UMA DISCIPLINA
 
@@ -542,14 +543,14 @@ void InserirProfessor(){
 		printf("\nDigite a Matricula do Professor: \n");
 		fgets(Matricula, sizeof(Matricula), stdin);
 		for(i=0;i<MAX;i++){
-			if(strstr(Professor.Matricula, Matricula)!=NULL){
+			if(strstr(Professor[i].Matricula, Matricula)!=NULL){
 				printf("Pois bem professor %s\n", Professor[i].Nome);
 			}
 		}
 		printf("\nDigite o codigo da disciplina: \n");
 		fgets(Codigo, sizeof(Codigo), stdin);
 		for(i=0;i<MAX;i++){
-			if(strstr(Professor.Matricula, Matricula)!=NULL){
+			if(strstr(Professor[i].Matricula, Matricula)!=NULL){
 				if(strstr(Disciplina[i].Codigo, Codigo)!=NULL){
 					if(Aluno[i].Flag2==0){
 						strcpy(Professor[i].Disciplina, Disciplina[i].Nome);
@@ -563,6 +564,144 @@ void InserirProfessor(){
 			}
 		}
 		printf("\n1 - Inserir outra\n0 - Sair\n");
-		scanf("%d", &opcao, stdin);
+		scanf("%d", &opcao);
+        fflush(stdin);
 	}while(opcao!=0);
-}//FIM DA FUNÇÃO INSERIR PROFESSOR EM UMA DISCIPLINA
+}//FIM DA FUNÇÃO INSERIR PROFESSOR EM UMA DISCIPLINA 
+
+
+
+//Função do menu de Listagem
+void Listar(){
+
+    int opcao;
+
+    do{
+
+		system("cls");
+
+		fflush(stdin);
+        printf("\n1 - Listar Alunos\n");
+        printf("\n2 - Listar Professores\n");
+        printf("\n3 - Listar Disciplinas\n");
+        printf("\n0 - Sair\n");
+        scanf("%d", &opcao);
+        switch(opcao){
+            case 1:
+                ListarAluno();
+            break;
+            case 2:
+                ListarProfessor();
+            break;
+            case 3:
+                ListarDisciplina();
+            break;
+        }
+    }while(opcao!=0);
+}//FIM DO MENU PRINCIPAL DE LISTAGEM
+
+
+//Função para listar alunos e suas respectivas disciplinas - Sub bloco da função listar
+void ListarAluno(){
+
+    int i,opcao;
+
+	system("cls");
+
+	fflush(stdin);
+	printf("\n_____LISTA DE ALUNOS_____\n");
+	for(i=0;i<MAX;i++){
+		if(Aluno[i].Flag1==1){
+			printf("Nome: %s\n", Aluno[i].Nome);
+			printf("Matricula: %s\n", Aluno[i].Matricula);
+			printf("CPF: %s\n", Aluno[i].Cpf);
+			printf("Sexo: %s\n", Aluno[i].Sexo);
+            printf("Nascimento:%d/%d/%d\n", Aluno[i].Dia, Aluno[i].Mes, Aluno[i].Ano);
+			if(Aluno[i].Flag2==1){
+				printf("\nMatriculado: %s \n", Aluno[i].Disciplina);
+				printf("codigo: %s \n", Aluno[i].Codigo);
+				printf("Semestre: %d \n", Aluno[i].Semestre);
+				printf("\n----------------\n");
+			}
+		}
+	}
+    while(opcao!=0){
+
+        printf("\n0 - Sair\n");
+	    scanf("%d", &opcao);
+
+        if(opcao==0)
+		    Listar();
+	    else
+		printf("\n Opcao Invalida");
+    }
+}//FIM DA FUNÇÃO DE LISTAR ALUNOS
+
+
+
+//Função para lista professores e suas respectivas disciplinas - Sub bloco da função listar
+void ListarProfessor(){
+
+    int i,opcao;
+
+	system("cls");
+
+	fflush(stdin);
+	printf("\n_____LISTA DE PROFESSORES_____\n");
+	for(i = 0; i < MAX; i++){
+		if(Professor[i].Flag1==1){
+			printf("Nome: %s\n", Professor[i].Nome);
+			printf("Matricula: %s\n", Professor[i].Matricula);
+			printf("CPF: %s\n", Professor[i].Cpf);
+			printf("Sexo: %s\n", Professor[i].Sexo);
+            printf("Nascimento:%d/%d/%d\n", Professor[i].Dia, Professor[i].Mes, Professor[i].Ano);
+			if(Professor[i].Flag2==1){
+				printf("\nLeciona: %s \n", Professor[i].Disciplina);
+				printf("codigo: %s \n", Professor[i].Codigo);
+				printf("Semestre: %d \n", Professor[i].Semestre);
+			}
+			printf("\n----------------\n");
+		}
+	}
+    while(opcao!=0){
+
+        printf("\n0 - Sair\n");
+	    scanf("%d", &opcao);
+
+        if(opcao==0)
+		    Listar();
+	    else
+		printf("\n Opcao Invalida");
+    }
+}//FIM DA FUNÇÃO DE LISTAR PROFESSOR
+
+
+
+//Função de listar as disciplinas cadastradas no sistema - Sub bloco da função listar
+void ListarDisciplina(){
+
+    int i,opcao;
+
+	system("cls");
+
+	fflush(stdin);
+	printf("\n_____LISTA DE DISCIPLINAS_____\n");
+	for(i=0;i<MAX;i++){
+		if(Disciplina[i].Flag1==1){
+			printf("Disciplina: %s\n", Disciplina[i].Nome);
+			printf("codigo: %s\n", Disciplina[i].Codigo);
+            printf("Semestre: %d\n", Disciplina[i].Semestre);
+			printf("\n----------------\n");
+		}
+	}
+    while(opcao!=0){
+
+        printf("\n0 - Sair\n");
+	    scanf("%d", &opcao);
+
+        if(opcao==0)
+		    Listar();
+	    else
+		printf("\n Opcao Invalida");
+    }
+}//FIM DA FUNÇÃO DE LISTAR DISCIPLINAS
