@@ -74,7 +74,7 @@ struct CadastroDisciplina
 
 
 //BlOCO MAIN (Menu Principal)
-int main(void)
+int main()
 {
 
     int opcao;
@@ -105,7 +105,7 @@ int main(void)
             break;
 
             case 3:
-            //Listar();
+            Listar();
             break;
 
             case 4:
@@ -113,7 +113,7 @@ int main(void)
             break;
 
             case 5:
-            //Excluir();
+            Excluir();
             break;
 
         }
@@ -208,11 +208,12 @@ void CadastrarAluno()
                         printf("\n CPF INVALIDO\n");
                         } 
                     }while(cont>11);
-                }
+                }//FIM DA VALIDAÇÃO DO CPF
+
                 
                 printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
                 scanf("%d", &Aluno[i].Sexo);
-                fflush(stdin);//FIM DA VALIDAÇÃO DO CPF
+                fflush(stdin);
 
 
                 //VALIDAÇÃO DO SEXO
@@ -273,7 +274,7 @@ void CadastrarAluno()
                     printf("\nO formato da data de nascimento esta invalida.\n");
                     }    
 
-                }while(cont != 1); //FIM DA VALIDAÇÃO DA DATA DE NASCIMENTO
+                }while(cont != 1); //FIM DA VALIDAÇÃO DA DATA DE NASCIMENTO BISSEXTO
             
                 Aluno[i].Flag1 = 1;  //INSERINDO O CADASTRO NA STRUCT ATRAVÉS DA FLAG  
                 break;
@@ -466,7 +467,8 @@ void CadastrarDisciplina()
  
 
 //MENU DE INSERÇÃO
-void Inserir(){
+void Inserir()
+{
 
 	int opcao;
 
@@ -493,9 +495,10 @@ void Inserir(){
 
 
 //Função de Inserir Aluno em Disciplina - Sub Bloco da função Inserir
-void InserirAluno(){
+void InserirAluno()
+{
 
-    int opcao,i;
+    int opcao,i,cont=0;
 	char Matricula[10], Codigo[10];
 
 	do{
@@ -507,34 +510,42 @@ void InserirAluno(){
 			if(strstr(Aluno[i].Matricula, Matricula)!=NULL){
 				printf("Pois bem %s\n", Aluno[i].Nome);
 			}
-		}
-		printf("\nDigite o codigo da disciplina: \n");
-		fgets(Codigo, sizeof(Codigo), stdin);
-		for(i=0;i<MAX;i++){
-			if(strstr(Aluno[i].Matricula, Matricula)!=NULL){
-				if(strstr(Disciplina[i].Codigo, Codigo)!=NULL){
-					if(Aluno[i].Flag2==0){
-						strcpy(Aluno[i].Disciplina, Disciplina[i].Nome);
-						strcpy(Aluno[i].Codigo, Disciplina[i].Codigo);
-						Aluno[i].Semestre=Disciplina[i].Semestre;
-						Aluno[i].Flag2=1;
-						printf("\nDisciplina Inserida\n");
-						break;	
-					}
-				}
-			}
-		}
-		printf("\n1 - Inserir outra\n0 - Sair\n");
+            else{
+                printf("\nMatricula Invalida\n");
+                cont++;
+            }
+            if(cont==0){
+                printf("\nDigite o codigo da disciplina: \n");
+		        fgets(Codigo, sizeof(Codigo), stdin);
+		        for(i=0;i<MAX;i++){
+			        if(strstr(Disciplina[i].Codigo, Codigo)!=NULL){
+				        if(Aluno[i].Flag2==0){
+					    strcpy(Aluno[i].Disciplina, Disciplina[i].Nome);
+					    strcpy(Aluno[i].Codigo, Disciplina[i].Codigo);
+					    Aluno[i].Semestre=Disciplina[i].Semestre; 
+					    Aluno[i].Flag2=1; // INSERINDO O ALUNO NA DISCIPLINA ATRAVES DA FLAG
+					    printf("\nDisciplina Inserida\n");
+					    break;	
+            	        }  
+                    }
+                    else{
+                    printf("\nCodigo Invalido\n");
+                    }
+                }
+            }
+	    }
+        printf("\n1 - Inserir outra\n0 - Sair\n");
 		scanf("%d", &opcao);
         fflush(stdin);
-	}while(opcao!=0);
-}//FIM DA FUNÇÃO INSERIR ALUNO EM UMA DISCIPLINA
+    }while(opcao!=0); 
+} //FIM DA FUNÇÃO INSERIR ALUNO EM UMA DISCIPLINA
 
 
 //Função de Inserir Professor em uma Disciplina - Sub Bloco da função Inserir
-void InserirProfessor(){
+void InserirProfessor()
+{
 
-    int opcao,i;
+    int opcao,i, cont;
 	char Matricula[10], Codigo[10];
 
 	do{
@@ -546,34 +557,41 @@ void InserirProfessor(){
 			if(strstr(Professor[i].Matricula, Matricula)!=NULL){
 				printf("Pois bem professor %s\n", Professor[i].Nome);
 			}
-		}
-		printf("\nDigite o codigo da disciplina: \n");
-		fgets(Codigo, sizeof(Codigo), stdin);
-		for(i=0;i<MAX;i++){
-			if(strstr(Professor[i].Matricula, Matricula)!=NULL){
-				if(strstr(Disciplina[i].Codigo, Codigo)!=NULL){
-					if(Aluno[i].Flag2==0){
+            else{
+                printf("\nMatricula Invalida\n");
+                cont++;
+            }
+		    if(cont==0){
+		        printf("\nDigite o codigo da disciplina: \n");
+		        fgets(Codigo, sizeof(Codigo), stdin);
+		        for(i=0;i<MAX;i++){
+				    if(strstr(Disciplina[i].Codigo, Codigo)!=NULL){
+					    if(Aluno[i].Flag2==0){
 						strcpy(Professor[i].Disciplina, Disciplina[i].Nome);
 						strcpy(Professor[i].Codigo, Disciplina[i].Codigo);
 						Professor[i].Semestre=Disciplina[i].Semestre;
-						Professor[i].Flag2=1;
+						Professor[i].Flag2=1;  // INSERINDO O PROFESSOR NA DISCIPLINA ATRAVÉS DA FLAG
 						printf("\nDisciplina Inserida\n");
 						break;	
-					}
-				}
-			}
-		}
-		printf("\n1 - Inserir outra\n0 - Sair\n");
-		scanf("%d", &opcao);
-        fflush(stdin);
-	}while(opcao!=0);
+					    }
+				    }
+                    else{
+                    printf("\nCodigo Invalido\n");
+                    }
+			    }
+		    }
+		    printf("\n1 - Inserir outra\n0 - Sair\n");
+		    scanf("%d", &opcao);
+            fflush(stdin);
+	    }   
+    }while(opcao!=0);
 }//FIM DA FUNÇÃO INSERIR PROFESSOR EM UMA DISCIPLINA 
 
 
 
 //Função do menu de Listagem
-void Listar(){
-
+void Listar()
+{
     int opcao;
 
     do{
@@ -602,22 +620,23 @@ void Listar(){
 
 
 //Função para listar alunos e suas respectivas disciplinas - Sub bloco da função listar
-void ListarAluno(){
+void ListarAluno()
+{
 
-    int i,opcao;
+    int i, opcao;
 
 	system("cls");
 
 	fflush(stdin);
 	printf("\n_____LISTA DE ALUNOS_____\n");
 	for(i=0;i<MAX;i++){
-		if(Aluno[i].Flag1==1){
+		if(Aluno[i].Flag1==1){ //VERIFICAÇÃO DE CADASTRO NA STRUCT
 			printf("Nome: %s\n", Aluno[i].Nome);
 			printf("Matricula: %s\n", Aluno[i].Matricula);
 			printf("CPF: %s\n", Aluno[i].Cpf);
-			printf("Sexo: %s\n", Aluno[i].Sexo);
-            printf("Nascimento:%d/%d/%d\n", Aluno[i].Dia, Aluno[i].Mes, Aluno[i].Ano);
-			if(Aluno[i].Flag2==1){
+			printf("Sexo: %d, 1-Masculino, 2-Feminino, 3-Outros\n", Aluno[i].Sexo);
+            printf("Nascimento:%d/%d/%d\n", Aluno[i].Nascimento.Dia, Aluno[i].Nascimento.Mes, Aluno[i].Nascimento.Ano);
+			if(Aluno[i].Flag2==1){ //VERIFICAÇÃO DE INSERÇÃO NA DISCIPLINA
 				printf("\nMatriculado: %s \n", Aluno[i].Disciplina);
 				printf("codigo: %s \n", Aluno[i].Codigo);
 				printf("Semestre: %d \n", Aluno[i].Semestre);
@@ -640,7 +659,8 @@ void ListarAluno(){
 
 
 //Função para lista professores e suas respectivas disciplinas - Sub bloco da função listar
-void ListarProfessor(){
+void ListarProfessor()
+{
 
     int i,opcao;
 
@@ -649,13 +669,13 @@ void ListarProfessor(){
 	fflush(stdin);
 	printf("\n_____LISTA DE PROFESSORES_____\n");
 	for(i = 0; i < MAX; i++){
-		if(Professor[i].Flag1==1){
+		if(Professor[i].Flag1==1){ //VERIFICAÇÃO DE CADASTRO NA STRUCT
 			printf("Nome: %s\n", Professor[i].Nome);
 			printf("Matricula: %s\n", Professor[i].Matricula);
 			printf("CPF: %s\n", Professor[i].Cpf);
-			printf("Sexo: %s\n", Professor[i].Sexo);
-            printf("Nascimento:%d/%d/%d\n", Professor[i].Dia, Professor[i].Mes, Professor[i].Ano);
-			if(Professor[i].Flag2==1){
+			printf("Sexo: %d, 1-Masculino, 2-Feminino, 3-Outros\n", Professor[i].Sexo);
+            printf("Nascimento:%d/%d/%d\n", Professor[i].Nascimento.Dia, Professor[i].Nascimento.Mes, Professor[i].Nascimento.Ano);
+			if(Professor[i].Flag2==1){ //VERIFICAÇÃO DE INSERÇÃO NA DISCIPLINA
 				printf("\nLeciona: %s \n", Professor[i].Disciplina);
 				printf("codigo: %s \n", Professor[i].Codigo);
 				printf("Semestre: %d \n", Professor[i].Semestre);
@@ -666,7 +686,7 @@ void ListarProfessor(){
     while(opcao!=0){
 
         printf("\n0 - Sair\n");
-	    scanf("%d", &opcao);
+	    scanf("%d", &opcao); 
 
         if(opcao==0)
 		    Listar();
@@ -677,8 +697,9 @@ void ListarProfessor(){
 
 
 
-//Função de listar as disciplinas cadastradas no sistema - Sub bloco da função listar
-void ListarDisciplina(){
+//Função de listar as disciplinas cadastradas no sistema - Sub bloco da função lista
+void ListarDisciplina()
+{
 
     int i,opcao;
 
@@ -687,7 +708,7 @@ void ListarDisciplina(){
 	fflush(stdin);
 	printf("\n_____LISTA DE DISCIPLINAS_____\n");
 	for(i=0;i<MAX;i++){
-		if(Disciplina[i].Flag1==1){
+		if(Disciplina[i].Flag1==1){ //VERIFICAÇÃO DO CADASTRO DA DISCIPLINA NA STRUCT
 			printf("Disciplina: %s\n", Disciplina[i].Nome);
 			printf("codigo: %s\n", Disciplina[i].Codigo);
             printf("Semestre: %d\n", Disciplina[i].Semestre);
@@ -699,9 +720,216 @@ void ListarDisciplina(){
         printf("\n0 - Sair\n");
 	    scanf("%d", &opcao);
 
-        if(opcao==0)
+        if(opcao==0){
 		    Listar();
-	    else
+        }
+	    else{
 		printf("\n Opcao Invalida");
+        }
     }
-}//FIM DA FUNÇÃO DE LISTAR DISCIPLINAS
+} //FIM DA FUNÇÃO DE LISTAR DISCIPLINAS 
+
+
+//MENU DE EXCLUSÃO
+void Excluir()
+{
+
+    int opcao;
+
+    do{
+
+		system("cls");
+        printf("\n1 - Remover Aluno\n");
+        printf("\n2 - Remover Professor\n");
+        printf("\n3 - Remover Disciplina\n");
+        printf("\n4 - Remover Disciplina do cadastro do professor\n");
+        printf("\n5 - Remover Disciplina do cadastro do aluno\n");
+        printf("\n0 - Sair\n");
+        scanf("%d", &opcao);
+
+        switch(opcao){
+            case 1:
+                ExcluirAluno();
+            break;
+            case 2:
+                ExcluirProfessor();
+            break;
+            case 3:
+                ExcluirDisciplina();
+            break;
+            case 4:
+                ExcluirProfDisc();
+            break;
+            case 5:
+                ExcluirAlunoDisc();
+            break;
+        }
+    }while(opcao!=0);
+}//FIM DO MENU DE EXCLUSÃO
+
+
+//FUNÇÃO PARA EXCLUIR ALUNO DO SISTEMA ATRAVÉS DA MUDANÇA DA FLAG
+void ExcluirAluno()
+{
+	system("cls");
+
+	char matricula[20];
+	int i,opcao;
+
+	fflush(stdin);
+
+	printf("\nDigite a Matricula do aluno a ser removido: ");
+	fgets(matricula, sizeof(matricula), stdin);
+	for(i=0;i<MAX;i++){
+		if(Aluno[i].Flag1==1){
+			if(strstr(Aluno[i].Matricula, matricula)!=NULL){
+				printf("Nome: %s\n", Aluno[i].Nome);
+				printf("CPF: %s\n", Aluno[i].Cpf);
+				printf("Matricula: %s\n", Aluno[i].Matricula);
+				printf("\n----------------\n");	
+				Aluno[i].Flag1=0;
+				printf("Aluno removida(o) com sucesso\n");
+			}
+		}
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    if(opcao==0){
+		Excluir();
+	}
+}//FIM DA FUNÇÃO DE EXCLUIR ALUNO DO SISTEMA
+
+
+
+//FUNÇÃO PARA EXCLUIR PROFESSOR DO SISTEMA ATRAVÉS DA MUDANÇA DA FLAG
+void ExcluirProfessor()
+{
+	system("cls");
+
+	char matricula[20];
+	int i,opcao;
+
+	fflush(stdin);
+
+	printf("\nDigite a Matricula do professor a ser removido: ");
+	fgets(matricula, sizeof(matricula), stdin);
+	for(i=0;i<MAX;i++){
+		if(Professor[i].Flag1==1){
+			if(strstr(Professor[i].Matricula, matricula)!=NULL){
+				printf("Nome: %s\n", Professor[i].Nome);
+				printf("CPF: %s\n", Professor[i].Cpf);
+				printf("Matricula: %s\n", Professor[i].Matricula);
+				printf("\n----------------\n");	
+				Professor[i].Flag1=0;
+				printf("Professor removido(a) com sucesso\n");
+			}
+		}
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    if(opcao==0){
+		Excluir();
+	}
+}//FIM DA FUNÇÃO DE EXCLUIR PROFESSOR DO SISTEMA
+
+
+//FUNÇÃO PARA EXCLUIR DISCIPLINA DO SISTEMA ATRAVÉS DA MUDANÇA DA FLAG
+void ExcluirDisciplina(){
+
+	system("cls");
+
+	char codigo[14];
+	int i,opcao;
+
+	fflush(stdin);
+	printf("\nDigite o codigo da disciplina a ser removida: ");
+	fgets(codigo, sizeof(codigo), stdin);
+	for(i=0;i<MAX;i++){
+		if(Disciplina[i].Flag1==1){
+			if(strstr(Disciplina[i].Codigo, codigo)!=NULL){
+				printf("Disciplina: %s\n", Disciplina[i].Nome);
+				printf("codigo: %s\n", Disciplina[i].Codigo);
+				printf("Semestre: %d\n", Disciplina[i].Semestre);
+				printf("\n----------------\n");	
+				Disciplina[i].Flag1=0;
+				printf("Disciplina removida com sucesso\n");
+			}
+		}
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    if(opcao==0){
+		Excluir();
+	}
+}//FIM DA FUNÇÃO DE EXCLUIR DISCIPLINA DO SISTEMA
+
+
+//FUNÇÃO PARA EXCLUIR PROFESSOR INSERIDO EM UMA DISCIPLINA ATRAVÉS DA MUDANÇA DA FLAG
+void ExcluirProfDisc(){
+
+	system("cls");
+
+	char matricula[20];
+	int i,opcao;
+
+	fflush(stdin);
+
+	printf("\nDigite a Matricula do professor que terá uma disciplina removida: ");
+	fgets(matricula, sizeof(matricula), stdin);
+	for(i=0;i<MAX;i++){
+		if(Professor[i].Flag2==1){
+			if(strstr(Professor[i].Matricula, matricula)!=NULL){
+				printf("Nome: %s\n", Professor[i].Nome);
+				printf("CPF: %s\n", Professor[i].Cpf);
+				printf("Matricula: %s\n", Professor[i].Matricula);
+				printf("Disciplina: %s\n", Disciplina[i].Nome);
+				printf("codigo: %s\n", Disciplina[i].Codigo);
+				printf("Semestre: %d\n", Disciplina[i].Semestre);
+				printf("\n----------------\n");	
+				Professor[i].Flag2=0;
+				printf("Disciplina removida do cadastro do professor com sucesso\n");
+			}
+		}
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    if(opcao==0){
+		Excluir();
+	}
+}//FIM DA FUNÇÃO DE EXCLUSÃO DE PROFESSOR DE UMA DISCIPLINA
+
+
+
+//FUNÇÃO PARA EXCLUIR UM ALUNO INSERIDO EM UMA DISCIPLINA
+void ExcluirAlunoDisc(){
+
+	system("cls");
+
+	char matricula[20];
+	int i,opcao;
+
+	fflush(stdin);
+
+	printf("\nDigite a Matricula do aluno que terá uma disciplina removida: ");
+	fgets(matricula, sizeof(matricula), stdin);
+	for(i=0;i<MAX;i++){
+		if(Aluno[i].Flag2==1){
+			if(strstr(Aluno[i].Matricula, matricula)!=NULL){
+				printf("Nome: %s\n", Aluno[i].Nome);
+				printf("CPF: %s\n", Aluno[i].Cpf);
+				printf("Matricula: %s\n", Aluno[i].Matricula);
+				printf("Disciplina: %s\n", Disciplina[i].Nome);
+				printf("codigo: %s\n", Disciplina[i].Codigo);
+				printf("Semestre: %d\n", Disciplina[i].Semestre);
+				printf("\n----------------\n");	
+				Aluno[i].Flag2=0;
+				printf("Disciplina removida do cadastro do aluno com sucesso\n");
+			}
+		}
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    if(opcao==0){
+		Excluir();
+	}
+}//FIM DA FUNÇÃO DE EXCLUSÃO DE ALUNO DE UMA DISCIPLINA
