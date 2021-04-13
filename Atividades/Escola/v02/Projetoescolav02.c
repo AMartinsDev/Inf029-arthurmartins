@@ -34,6 +34,9 @@ void AtualizarProfessor();
 void AtualizarAluno();
 void AtualizarDisciplina();
 
+//Declaração de função para limpeza de buffer
+void LimparBuffer();
+
 //Struct para cadastrar data de nascimento
 struct CadastroNascimento
 {
@@ -81,7 +84,7 @@ int main()
 
     do
     {
-        system("Cls");
+       system("clear||cls");
 
         printf("\n -----Bem Vindo Ao Projeto Escola-----\n");
         printf("\n Digite 1 Para Cadastrar:\n");
@@ -92,7 +95,7 @@ int main()
         printf("\n Digite 0 Para Encerrar:\n");
 
         scanf("%d", &opcao);
-        getchar();
+        LimparBuffer();
 
         switch(opcao){
             
@@ -109,7 +112,7 @@ int main()
             break;
 
             case 4:
-            //Atualizar();
+            Atualizar();
             break;
 
             case 5:
@@ -117,12 +120,23 @@ int main()
             break;
 
         }
-        getchar();
+        LimparBuffer();
 
     }while(opcao != 0);
     
     return 0;
 }
+
+
+//FUNÇÃO DE LIMPEZA DE BUFFER
+void LimparBuffer(){
+
+	char c;
+	while((c = getchar()) != '\n' && c != EOF);
+
+}
+//FIM DA FUNÇÃO DE LIMPEZA
+
 
 
 //Função Cadastro
@@ -132,7 +146,7 @@ void Cadastrar(){
 
         do
         {
-            system("Cls");
+           system("clear||cls");
 
             printf("\n -----Bem Vindo Ao Sistema De Cadastramento-----\n");
             printf("\n Digite 1 Para Cadastrar Aluno:\n");
@@ -141,7 +155,7 @@ void Cadastrar(){
             printf("\n Digite 0 Para Encerrar:\n");
 
             scanf("%d", &opcao);
-            getchar();
+            LimparBuffer();
 
             switch(opcao){
             
@@ -158,7 +172,7 @@ void Cadastrar(){
             break;
 
             }
-            getchar();
+            LimparBuffer();
 
         }while(opcao != 0);
 }//FIM DO BLOCO PRINCIPAL DE CADASTRO GERAL
@@ -171,7 +185,7 @@ void CadastrarAluno()
 
     do
     {
-        system("Cls");
+        system("clear||cls");
 
         for(i=0; i<MAX; i++)
         {
@@ -182,7 +196,7 @@ void CadastrarAluno()
 		        fgets(Aluno[i].Nome, sizeof(Aluno[i].Nome), stdin); 
                 printf("\nMatricula: ");
 		        fgets(Aluno[i].Matricula, sizeof(Aluno[i].Matricula), stdin);
-                fflush(stdin);
+                LimparBuffer();
                 printf("\nCPF: ");
 		        fgets(Aluno[i].Cpf, sizeof(Aluno[i].Cpf), stdin);
                 
@@ -199,7 +213,7 @@ void CadastrarAluno()
                     do{
                         printf("\nCPF: ");
 		                fgets(Aluno[i].Cpf, sizeof(Aluno[i].Cpf), stdin);
-                        fflush(stdin);
+                        LimparBuffer();
                         cont=0;   
                         while(Aluno[i].Cpf[cont] != '\n'){
                         cont++;
@@ -213,7 +227,7 @@ void CadastrarAluno()
                 
                 printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
                 scanf("%d", &Aluno[i].Sexo);
-                fflush(stdin);
+                LimparBuffer();
 
 
                 //VALIDAÇÃO DO SEXO
@@ -221,7 +235,7 @@ void CadastrarAluno()
                     printf("\nOpcao invalida\n");
                     printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
                     scanf("%d", &Aluno[i].Sexo);
-                    fflush(stdin);
+                    LimparBuffer();
                 }//FIM DA VALIDAÇÃO DO SEXO
                 
 
@@ -229,17 +243,17 @@ void CadastrarAluno()
                 //VALIDAÇÃO DE DATA DE NASCIMENTO COM ANO BISSEXTO
                 do
                 {
-                system("cls");
+                system("clear||cls");
                 printf("\nData de nascimento\n");
                 printf("\nDia: ");
                 scanf("%d", &Aluno[i].Nascimento.Dia);
-                fflush(stdin);
+                LimparBuffer();
                 printf("\nMes: ");
                 scanf("%d", &Aluno[i].Nascimento.Mes);
-                fflush(stdin);
+                LimparBuffer();
                 printf("\nAno: ");
                 scanf("%d", &Aluno[i].Nascimento.Ano);
-                fflush(stdin);
+                LimparBuffer();
 
                 cont=0;
 
@@ -283,8 +297,7 @@ void CadastrarAluno()
 
         printf("\n1 - Continuar cadastrando\n0 - Sair\n");
 		scanf("%d", &opcao);
-        fflush(stdin);
-        getchar();
+        LimparBuffer();
 
     }while(opcao != 0);
 }//FIM DA FUNÇÃO DE CADASTRAR ALUNO
@@ -298,7 +311,7 @@ void CadastrarProfessor()
 
     do
     {
-        system("Cls");
+       system("clear||cls");
 
         for(i=0; i<MAX; i++)
         {
@@ -309,7 +322,7 @@ void CadastrarProfessor()
 		        fgets(Professor[i].Nome, sizeof(Professor[i].Nome), stdin); 
                 printf("\nMatricula: ");
 		        fgets(Professor[i].Matricula, sizeof(Professor[i].Matricula), stdin);
-                fflush(stdin);
+                LimparBuffer();
                 printf("\nCPF: ");
 		        fgets(Professor[i].Cpf, sizeof(Professor[i].Cpf), stdin);
                 
@@ -326,7 +339,7 @@ void CadastrarProfessor()
                     do{
                         printf("\nCPF: ");
 		                fgets(Professor[i].Cpf, sizeof(Professor[i].Cpf), stdin);
-                        fflush(stdin);
+                        LimparBuffer();
                         cont=0;   
                         while(Professor[i].Cpf[cont] != '\n'){
                         cont++;
@@ -339,7 +352,7 @@ void CadastrarProfessor()
                 
                 printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
                 scanf("%d", &Professor[i].Sexo);
-                fflush(stdin);//FIM DA VALIDAÇÃO DO CPF
+                LimparBuffer();//FIM DA VALIDAÇÃO DO CPF
 
 
                 //VALIDAÇÃO DO SEXO
@@ -347,7 +360,7 @@ void CadastrarProfessor()
                     printf("\nOpcao invalida\n");
                     printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
                     scanf("%d", &Professor[i].Sexo);
-                    fflush(stdin);
+                    LimparBuffer();
                 }//FIM DA VALIDAÇÃO DO SEXO
                 
 
@@ -355,17 +368,17 @@ void CadastrarProfessor()
                 //VALIDAÇÃO DE DATA DE NASCIMENTO COM ANO BISSEXTO
                 do
                 {
-                system("cls");
+                system("clear||cls");
                 printf("\nData de nascimento\n");
                 printf("\nDia: ");
                 scanf("%d", &Professor[i].Nascimento.Dia);
-                fflush(stdin);
+                LimparBuffer();
                 printf("\nMes: ");
                 scanf("%d", &Professor[i].Nascimento.Mes);
-                fflush(stdin);
+                LimparBuffer();
                 printf("\nAno: ");
                 scanf("%d", &Professor[i].Nascimento.Ano);
-                fflush(stdin);
+                LimparBuffer();
 
                 cont=0;
 
@@ -409,8 +422,7 @@ void CadastrarProfessor()
 
         printf("\n1 - Continuar cadastrando\n0 - Sair\n");
 		scanf("%d", &opcao);
-        fflush(stdin);
-        getchar();
+        LimparBuffer();
 
     }while(opcao != 0);
 }//FIM DA FUNÇÃO CADASTRAR PROFESSOR
@@ -424,7 +436,7 @@ void CadastrarDisciplina()
 
     do
     {
-        system("Cls");
+        system("clear||cls");
 
         for(i=0; i<MAX; i++)
         {
@@ -435,7 +447,7 @@ void CadastrarDisciplina()
 		        fgets(Disciplina[i].Nome, sizeof(Disciplina[i].Nome), stdin); 
                 printf("\nCodigo: ");
 		        fgets(Disciplina[i].Codigo, sizeof(Disciplina[i].Codigo), stdin);
-                fflush(stdin);
+                LimparBuffer();
                 
                 //INSERÇÃO E VALIDAÇÃO DO SEMESTRE
                 cont=0;
@@ -443,7 +455,7 @@ void CadastrarDisciplina()
 
                     printf("\nSemestre Da Disciplina: ");
 		            scanf("%d", &Disciplina[i].Semestre);
-                    fflush(stdin);
+                    LimparBuffer();
 
                     if(Disciplina[i].Semestre >= 1 && Disciplina[i].Semestre <=12)
                         cont=1;
@@ -458,8 +470,7 @@ void CadastrarDisciplina()
 
         printf("\n1 - Continuar cadastrando\n0 - Sair\n");
 		scanf("%d", &opcao);
-        fflush(stdin);
-        getchar();
+        LimparBuffer();
 
     }while(opcao != 0);
 }//FIM DA FUNÇÃO CADASTRAR DISCIPLINA
@@ -474,13 +485,13 @@ void Inserir()
 
 	do{
 
-		system("cls");
-		fflush(stdin);
+		system("clear||cls");
+		LimparBuffer();
 		printf("\nDigite 1 para Inserir Aluno em disciplina\n");
 		printf("\nDigite 2 para Inserir Professor em disciplina\n");
 		printf("\nDigite 0 - Sair\n");
 		scanf("%d", &opcao);
-        fflush(stdin);
+        LimparBuffer();
 
 		switch(opcao){
 			case 1:
@@ -502,8 +513,8 @@ void InserirAluno()
 	char Matricula[10], Codigo[10];
 
 	do{
-		system("cls");
-		fflush(stdin);
+		system("clear||cls");
+		LimparBuffer();
 		printf("\nDigite a Matricula do aluno: \n");
 		fgets(Matricula, sizeof(Matricula), stdin);
 		for(i=0;i<MAX;i++){
@@ -536,7 +547,7 @@ void InserirAluno()
 	    }
         printf("\n1 - Inserir outra\n0 - Sair\n");
 		scanf("%d", &opcao);
-        fflush(stdin);
+        LimparBuffer();
     }while(opcao!=0); 
 } //FIM DA FUNÇÃO INSERIR ALUNO EM UMA DISCIPLINA
 
@@ -549,8 +560,8 @@ void InserirProfessor()
 	char Matricula[10], Codigo[10];
 
 	do{
-		system("cls");
-		fflush(stdin);
+		system("clear||cls");
+		LimparBuffer();
 		printf("\nDigite a Matricula do Professor: \n");
 		fgets(Matricula, sizeof(Matricula), stdin);
 		for(i=0;i<MAX;i++){
@@ -582,7 +593,7 @@ void InserirProfessor()
 		    }
 		    printf("\n1 - Inserir outra\n0 - Sair\n");
 		    scanf("%d", &opcao);
-            fflush(stdin);
+            LimparBuffer();
 	    }   
     }while(opcao!=0);
 }//FIM DA FUNÇÃO INSERIR PROFESSOR EM UMA DISCIPLINA 
@@ -596,9 +607,9 @@ void Listar()
 
     do{
 
-		system("cls");
+		system("clear||cls");
 
-		fflush(stdin);
+		LimparBuffer();
         printf("\n1 - Listar Alunos\n");
         printf("\n2 - Listar Professores\n");
         printf("\n3 - Listar Disciplinas\n");
@@ -625,9 +636,9 @@ void ListarAluno()
 
     int i, opcao;
 
-	system("cls");
+	system("clear||cls");
 
-	fflush(stdin);
+	LimparBuffer();
 	printf("\n_____LISTA DE ALUNOS_____\n");
 	for(i=0;i<MAX;i++){
 		if(Aluno[i].Flag1==1){ //VERIFICAÇÃO DE CADASTRO NA STRUCT
@@ -664,9 +675,9 @@ void ListarProfessor()
 
     int i,opcao;
 
-	system("cls");
+	system("clear||cls");
 
-	fflush(stdin);
+	LimparBuffer();
 	printf("\n_____LISTA DE PROFESSORES_____\n");
 	for(i = 0; i < MAX; i++){
 		if(Professor[i].Flag1==1){ //VERIFICAÇÃO DE CADASTRO NA STRUCT
@@ -703,9 +714,9 @@ void ListarDisciplina()
 
     int i,opcao;
 
-	system("cls");
+	system("clear||cls");
 
-	fflush(stdin);
+	LimparBuffer();
 	printf("\n_____LISTA DE DISCIPLINAS_____\n");
 	for(i=0;i<MAX;i++){
 		if(Disciplina[i].Flag1==1){ //VERIFICAÇÃO DO CADASTRO DA DISCIPLINA NA STRUCT
@@ -738,7 +749,7 @@ void Excluir()
 
     do{
 
-		system("cls");
+		system("clear||cls");
         printf("\n1 - Remover Aluno\n");
         printf("\n2 - Remover Professor\n");
         printf("\n3 - Remover Disciplina\n");
@@ -771,12 +782,12 @@ void Excluir()
 //FUNÇÃO PARA EXCLUIR ALUNO DO SISTEMA ATRAVÉS DA MUDANÇA DA FLAG
 void ExcluirAluno()
 {
-	system("cls");
+	system("clear||cls");
 
 	char matricula[20];
 	int i,opcao;
 
-	fflush(stdin);
+	LimparBuffer();
 
 	printf("\nDigite a Matricula do aluno a ser removido: ");
 	fgets(matricula, sizeof(matricula), stdin);
@@ -794,6 +805,7 @@ void ExcluirAluno()
 	}
 	printf("\n0 - Sair\n");
 	scanf("%d", &opcao, stdin);
+    LimparBuffer();
     if(opcao==0){
 		Excluir();
 	}
@@ -804,12 +816,12 @@ void ExcluirAluno()
 //FUNÇÃO PARA EXCLUIR PROFESSOR DO SISTEMA ATRAVÉS DA MUDANÇA DA FLAG
 void ExcluirProfessor()
 {
-	system("cls");
+	system("clear||cls");
 
 	char matricula[20];
 	int i,opcao;
 
-	fflush(stdin);
+	LimparBuffer();
 
 	printf("\nDigite a Matricula do professor a ser removido: ");
 	fgets(matricula, sizeof(matricula), stdin);
@@ -827,6 +839,7 @@ void ExcluirProfessor()
 	}
 	printf("\n0 - Sair\n");
 	scanf("%d", &opcao, stdin);
+    LimparBuffer();
     if(opcao==0){
 		Excluir();
 	}
@@ -836,12 +849,12 @@ void ExcluirProfessor()
 //FUNÇÃO PARA EXCLUIR DISCIPLINA DO SISTEMA ATRAVÉS DA MUDANÇA DA FLAG
 void ExcluirDisciplina(){
 
-	system("cls");
+	system("clear||cls");
 
 	char codigo[14];
 	int i,opcao;
 
-	fflush(stdin);
+	LimparBuffer();
 	printf("\nDigite o codigo da disciplina a ser removida: ");
 	fgets(codigo, sizeof(codigo), stdin);
 	for(i=0;i<MAX;i++){
@@ -858,6 +871,7 @@ void ExcluirDisciplina(){
 	}
 	printf("\n0 - Sair\n");
 	scanf("%d", &opcao, stdin);
+    LimparBuffer();
     if(opcao==0){
 		Excluir();
 	}
@@ -867,12 +881,12 @@ void ExcluirDisciplina(){
 //FUNÇÃO PARA EXCLUIR PROFESSOR INSERIDO EM UMA DISCIPLINA ATRAVÉS DA MUDANÇA DA FLAG
 void ExcluirProfDisc(){
 
-	system("cls");
+	system("clear||cls");
 
 	char matricula[20];
 	int i,opcao;
 
-	fflush(stdin);
+	LimparBuffer();
 
 	printf("\nDigite a Matricula do professor que terá uma disciplina removida: ");
 	fgets(matricula, sizeof(matricula), stdin);
@@ -893,6 +907,7 @@ void ExcluirProfDisc(){
 	}
 	printf("\n0 - Sair\n");
 	scanf("%d", &opcao, stdin);
+    LimparBuffer();
     if(opcao==0){
 		Excluir();
 	}
@@ -903,12 +918,12 @@ void ExcluirProfDisc(){
 //FUNÇÃO PARA EXCLUIR UM ALUNO INSERIDO EM UMA DISCIPLINA
 void ExcluirAlunoDisc(){
 
-	system("cls");
+	system("clear||cls");
 
 	char matricula[20];
 	int i,opcao;
 
-	fflush(stdin);
+	LimparBuffer();
 
 	printf("\nDigite a Matricula do aluno que terá uma disciplina removida: ");
 	fgets(matricula, sizeof(matricula), stdin);
@@ -929,7 +944,244 @@ void ExcluirAlunoDisc(){
 	}
 	printf("\n0 - Sair\n");
 	scanf("%d", &opcao, stdin);
+    LimparBuffer();
     if(opcao==0){
 		Excluir();
 	}
 }//FIM DA FUNÇÃO DE EXCLUSÃO DE ALUNO DE UMA DISCIPLINA
+
+
+//MENU DE ATUALIZAÇÃO DE CADASTRO
+void Atualizar(){
+
+	int opcao;
+
+    do{
+
+		system("clear||cls");
+
+        printf("\n1 - Pesquisar Aluno\n");
+        printf("\n2 - Pesquisar Professor\n");
+        printf("\n3 - Pesquisar Disciplina\n");
+        printf("\n0 - Sair\n");
+        scanf("%d", &opcao);
+        LimparBuffer();
+
+        switch(opcao){
+            case 1: AtualizarAluno();
+            break;
+            case 2:
+                AtualizarProfessor();
+            break;
+            case 3:
+                AtualizarDisciplina();
+            break;
+        }
+    }while(opcao!=0);
+}
+//FIM DO MENU DE ATUALIZAÇÃO
+
+
+//FUNÇÃO DE ATUALIZAR CADASTRO DE ALUNO
+void AtualizarAluno(){
+
+	char matricula[20];
+	int i, opcao;
+
+	system("clear||cls");
+
+	LimparBuffer();
+	printf("\nDigite a matricula do aluno para realizar atualização cadastral: ");
+	fgets(matricula, sizeof(matricula), stdin);
+	for(i=0;i<MAX;i++){
+		if(strstr(Aluno[i].Matricula, matricula)!=NULL){
+			if(Aluno[i].Flag1==1){
+				printf("Nome: %s\n", Aluno[i].Nome);
+				printf("Matricula: %s\n", Aluno[i].Matricula);
+				printf("CPF: %s\n", Aluno[i].Cpf);
+				printf("Sexo: %d, 1-Masculino, 2-Feminino, 3-Outros\n", Aluno[i].Sexo);
+				printf("Nascimento:%d/%d/%d\n", Aluno[i].Nascimento.Dia, Aluno[i].Nascimento.Mes, Aluno[i].Nascimento.Ano);
+				if(Aluno[i].Flag2==1){
+					printf("\nMatriculado: %s \n", Aluno[i].Disciplina);
+					printf("codigo: %s \n", Aluno[i].Codigo);
+					printf("Semestre: %d \n", Aluno[i].Semestre);
+					printf("\n----------------\n");
+				}
+			}
+		}
+        printf("\n O que gostaria de atualizar do aluno?");
+        printf("\n1 - Atualizar Nome do Aluno\n");
+        printf("\n2 - Atualizar Matricula do Aluno\n");
+        printf("\n3 - Atualizar Sexo do Aluno\n");
+        printf("\n0 - Sair\n");
+        scanf("%d", &opcao);
+        LimparBuffer();
+
+        switch(opcao){
+            case 1:
+                printf("\nNome: ");
+		        fgets(Aluno[i].Nome, sizeof(Aluno[i].Nome), stdin); 
+                LimparBuffer();
+            break;
+            case 2:
+                printf("\nMatricula: ");
+		        fgets(Aluno[i].Matricula, sizeof(Aluno[i].Matricula), stdin);
+                LimparBuffer();
+            break;
+            case 3:
+                printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
+                scanf("%d", &Aluno[i].Sexo);
+                LimparBuffer();
+
+                //VALIDAÇÃO DO SEXO
+                while((Aluno[i].Sexo < 1) || (Aluno[i].Sexo > 3)){
+                    printf("\nOpcao invalida\n");
+                    printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
+                    scanf("%d", &Aluno[i].Sexo);
+                    LimparBuffer();
+                }//FIM DA VALIDAÇÃO DO SEXO
+            break;
+        }
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    LimparBuffer();
+    if(opcao==0){
+		Atualizar();
+	}
+}//FIM DA FUNÇÃO DE ATUALIZAR CADASTRO DO ALUNO
+
+
+//FUNÇÃO DE ATUALIZAR CADASTRO DE PROFESSOR
+void AtualizarProfessor(){
+
+	char matricula[20];
+	int i, opcao;
+
+	system("clear||cls");
+
+	LimparBuffer();
+	printf("\nDigite a matricula do professor para realizar atualização cadastral: ");
+	fgets(matricula, sizeof(matricula), stdin);
+	for(i=0;i<MAX;i++){
+		if(strstr(Professor[i].Matricula, matricula)!=NULL){
+			if(Professor[i].Flag1==1){
+				printf("Nome: %s\n", Professor[i].Nome);
+				printf("Matricula: %s\n", Professor[i].Matricula);
+				printf("CPF: %s\n", Professor[i].Cpf);
+				printf("Sexo: %d, 1-Masculino, 2-Feminino, 3-Outros\n", Professor[i].Sexo);
+				printf("Nascimento:%d/%d/%d\n", Professor[i].Nascimento.Dia, Professor[i].Nascimento.Mes, Professor[i].Nascimento.Ano);
+				if(Professor[i].Flag2==1){
+					printf("\nLecionando: %s \n", Professor[i].Disciplina);
+					printf("codigo: %s \n", Professor[i].Codigo);
+					printf("Semestre: %d \n", Professor[i].Semestre);
+					printf("\n----------------\n");
+				}
+			}
+		}
+        printf("\n O que gostaria de atualizar do professor?");
+        printf("\n1 - Atualizar Nome do professor\n");
+        printf("\n2 - Atualizar Matricula do professor\n");
+        printf("\n3 - Atualizar Sexo do professor\n");
+        printf("\n0 - Sair\n");
+        scanf("%d", &opcao);
+        LimparBuffer();
+
+        switch(opcao){
+            case 1:
+                printf("\nNome: ");
+		        fgets(Professor[i].Nome, sizeof(Professor[i].Nome), stdin); 
+                LimparBuffer();
+            break;
+            case 2:
+                printf("\nMatricula: ");
+		        fgets(Professor[i].Matricula, sizeof(Professor[i].Matricula), stdin);
+                LimparBuffer();
+            break;
+            case 3:
+                printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
+                scanf("%d", &Professor[i].Sexo);
+                LimparBuffer();
+
+                //VALIDAÇÃO DO SEXO
+                while((Professor[i].Sexo < 1) || (Professor[i].Sexo > 3)){
+                    printf("\nOpcao invalida\n");
+                    printf("\nSexo:\n \n1-Masculino\n \n2-Feminino\n \n3-Outros\n\n");
+                    scanf("%d", &Professor[i].Sexo);
+                    LimparBuffer();
+                }//FIM DA VALIDAÇÃO DO SEXO
+            break;
+        }
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    LimparBuffer();
+    if(opcao==0){
+		Atualizar();
+	}
+}//FIM DA FUNÇÃO DE ATUALIZAR CADASTRO DO ALUNO
+
+
+
+void AtualizarDisciplina(){
+
+	char codigo[14];
+	int i, opcao, cont;
+
+	system("clear||cls");
+
+	LimparBuffer();
+	printf("\nDigite o codigo da disciplina que sera atualizada: ");
+	fgets(codigo, sizeof(codigo), stdin);
+	for(i=0;i<MAX;i++){
+		if(strstr(Disciplina[i].Codigo, codigo)!=NULL){
+			if(Disciplina[i].Flag1==1){
+				printf("Disciplina: %s\n", Disciplina[i].Nome);
+				printf("Codigo: %s\n", Disciplina[i].Codigo);
+				printf("Semestre: %d\n", Disciplina[i].Semestre);
+				printf("\n----------------\n");
+			}
+		}
+        printf("\n O que gostaria de atualizar da disciplina?");
+        printf("\n1 - Atualizar Nome da disciplina\n");
+        printf("\n2 - Atualizar Codigo da disciplina\n");
+        printf("\n3 - Atualizar Semestre da\n");
+        printf("\n0 - Sair\n");
+        scanf("%d", &opcao);
+        LimparBuffer();
+
+        switch(opcao){
+            case 1:
+                printf("\nNome: ");
+		        fgets(Disciplina[i].Nome, sizeof(Disciplina[i].Nome), stdin); 
+                LimparBuffer();
+            break;
+            case 2:
+                printf("\nCodigo: ");
+		        fgets(Disciplina[i].Codigo, sizeof(Disciplina[i].Codigo), stdin);
+                LimparBuffer();
+            break;
+            case 3:
+                cont=0;
+                while(cont != 1){
+
+                    printf("\nSemestre Da Disciplina: ");
+		            scanf("%d", &Disciplina[i].Semestre);
+                    LimparBuffer();
+
+                    if(Disciplina[i].Semestre >= 1 && Disciplina[i].Semestre <=12)
+                        cont=1;
+                    else
+                    printf("\nSemestre Invalido\n");
+                }
+            break;
+        }
+	}
+	printf("\n0 - Sair\n");
+	scanf("%d", &opcao, stdin);
+    LimparBuffer();
+    if(opcao==0){
+		Atualizar();
+	}
+}
+
