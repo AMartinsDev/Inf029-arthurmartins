@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+
 #define MAX 5
 
 //Declaração de funções do menu de cadastro
@@ -34,7 +35,7 @@ void AtualizarProfessor();
 void AtualizarAluno();
 void AtualizarDisciplina();
 
-//Declaração de função para limpeza de buffer
+//Função para limpar o buffer
 void LimparBuffer();
 
 //Struct para cadastrar data de nascimento
@@ -74,6 +75,15 @@ struct CadastroDisciplina
 
 }Disciplina[MAX];
 
+
+//FUNÇÃO DE LIMPEZA DE BUFFER
+void LimparBuffer(void){
+
+	char c;
+	while((c = getchar()) != '\n' && c != EOF);
+
+}
+//FIM DA FUNÇÃO DE LIMPEZA
 
 
 //BlOCO MAIN (Menu Principal)
@@ -126,17 +136,6 @@ int main()
     
     return 0;
 }
-
-
-//FUNÇÃO DE LIMPEZA DE BUFFER
-void LimparBuffer(){
-
-	char c;
-	while((c = getchar()) != '\n' && c != EOF);
-
-}
-//FIM DA FUNÇÃO DE LIMPEZA
-
 
 
 //Função Cadastro
