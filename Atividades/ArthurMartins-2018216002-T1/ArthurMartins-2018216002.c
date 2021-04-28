@@ -127,13 +127,31 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
 
     //calcule os dados e armazene nas três variáveis a seguir
     int nDias, nMeses, nAnos;
-
+    int dia1, mes1, ano1;
+    int dia2,mes2,ano2;
+    int i;
+    
     if (q1(datainicial) == 0)
         return 2;
 
-    nDias = 4;
-    nMeses = 10;
-    nAnos = 2;
+    if (q1(datafinal) == 0)
+        return 3;
+
+    sscanf(datainicial, "%d/%d/%d", &dia1, &mes1, &ano1);
+    fflush(stdin);
+
+    sscanf(datafinal, "%d/%d/%d", &dia2, &mes2, &ano2);
+    fflush(stdin);
+
+    if( ano1>ano2 || ((ano1==ano2) && (mes1>mes2)) || ((ano1==ano2) && (mes1==mes2) && (dia1 > dia2))){
+        return 4;
+    }
+
+    i = 0;
+
+    nDias = dia1 - dia2;
+    nAnos = ano1 - ano2;
+    nMeses = mes1 - mes2;
 
     /*mantenha o código abaixo, para salvar os dados em 
     nos parâmetros da funcao
@@ -204,9 +222,47 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-    int qtdOcorrencias = -1;
+    char texto[251], busca[20];
 
-    return qtdOcorrencias;
+    int i , j , qtdOcorrencias = 0, tamtexto, tambusca, x = 0, aux = 0, k = 0, cont = 0;
+
+    strcpy(texto, strTexto);
+    strcpy(busca, strBusca);
+
+    tambusca = strlen(busca);
+    tamtexto = strlen(texto);
+
+    for (i = 0; i < tamtexto; i++)
+    {
+        if (busca[0] == texto[i])
+        {
+            posicoes[k] = i + 1;
+            aux = i;
+            x = 0;
+
+            for (j = 0; j < tambusca; j++)
+            {
+                if (busca[j] == texto[aux])
+                {
+                    x++;
+                }
+                aux++;
+            }
+            if (x >= tambusca)
+            {
+                qtdOcorrencias++;
+                k++;
+                posicoes[k] = i + x;
+                k++;
+            }
+            else
+                posicoes[k] = -1;
+        }
+    }
+    if (qtdOcorrencias >= 1)
+        for (i = 0; posicoes[i] != -1; i++)
+
+            return qtdOcorrencias;
 }
 
 /*
@@ -247,6 +303,40 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias = 0;
+
+    char numero[20], busca[20];
+
+    int aux, tam1, tam2, i=0, j=0, x;
+
+    sprintf(numero, "%i", numerobase);
+    sprintf(busca, "%i",numerobusca);
+
+    tam1 = strlen(numero);
+    tam2 = strlen(busca);
+
+
+    for (i=0;i<tam1;i++){
+
+        if (busca[0] == numero[i]){   
+        
+            aux = i;
+            x = 0;
+
+            for(j=0;j<tam2;j++){
+        
+                if(busca[j] == numero[aux]){
+                x++;
+                }
+
+                aux++;
+            }
+
+            if (x >= tam2){
+            qtdOcorrencias++;
+            }
+        }
+      
+    }
     return qtdOcorrencias;
 }

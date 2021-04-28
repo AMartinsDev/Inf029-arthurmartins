@@ -31,14 +31,14 @@ void testQ6();
 
 int main()
 {
-    //testSomar();
-    //testFatorial();
+    testSomar();
+    testFatorial();
     testQ1();
-    //testQ2();
-    //testQ3();
-    //testQ4();
-    //testQ5();
-    //testQ6();
+    testQ2();
+    testQ3();
+    testQ4();
+    testQ5();
+    testQ6();
 }
 
 
@@ -91,7 +91,7 @@ void testQ2()
     printf("%d\n", qtdDias == 0);
     printf("%d\n", qtdMeses == 0);
     printf("%d\n", qtdAnos == 1);
-
+    
     //teste 2 - retornos
     qtdDias = -1;
     qtdMeses = -1;
@@ -124,6 +124,7 @@ void testQ2()
     printf("%d\n", qtdDias == 1);
     printf("%d\n", qtdMeses == 1);
     printf("%d\n", qtdAnos == 0);
+    
 }
 
 void testQ3()
@@ -143,6 +144,7 @@ void testQ4()
     char strBusca[50];
     int posicoes[30];
     int i;
+
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
