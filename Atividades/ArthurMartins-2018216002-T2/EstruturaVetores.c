@@ -635,11 +635,10 @@ Retorno (No*)
     NULL, caso não tenha nenhum número nas listas
     No*, ponteiro para o início da lista com cabeçote
 */
-No *montarListaEncadeadaComCabecote()
-{
 
-    return NULL;
+No *montarListaEncadeadaComCabecote(){
 }
+
 /*
 Objetivo: retorna os números da lista enceada com cabeçote armazenando em vetorAux.
 Retorno void
@@ -647,6 +646,8 @@ Retorno void
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[])
 {
 }
+
+
 /*
 Objetivo: Destruir a lista encadeada com cabeçote a partir de início.
 O ponteiro inicio deve ficar com NULL.
@@ -655,7 +656,22 @@ Retorno
 */
 void destruirListaEncadeadaComCabecote(No **inicio)
 {
+    if(inicio != NULL){
+
+		No *aux;
+
+		while(inicio != NULL){
+
+			aux = inicio;
+			inicio = (*inicio)->prox;
+			free(aux);
+
+		}
+
+		free(inicio);
+	}
 }
+
 
 /*
 Objetivo: finaliza o programa. deve ser chamado ao final do programa 
