@@ -18,3 +18,16 @@ int multiplicacao(int a, int b) {
 	return a + multiplicacao(a, b - 1);
 
 }
+
+int main()
+{   
+
+	int result;
+
+	result = multiplicacao(5, 5);
+
+	printf("\n%d", result);
+
+  	return 0;
+
+} 

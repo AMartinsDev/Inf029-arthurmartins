@@ -1,16 +1,16 @@
 #include <stdio.h>
 
-void imprimepares(int n);
+void imprimeparesdecrescente(int n);
 
 int main(void)
 { 
   int n = 8;
-  imprimepares(n);
+  imprimeparesdecrescente(n);
 
   return 0;
 }
 
-void imprimepares(int n){
+void imprimeparesdecrescente(int n){
 
   if(n % 2 == 0)
 
@@ -19,7 +19,7 @@ void imprimepares(int n){
   
 	if(n>0)
 
-	imprimepares(n-1);
+	imprimeparesdecrescente(n-1);
 
 }
   

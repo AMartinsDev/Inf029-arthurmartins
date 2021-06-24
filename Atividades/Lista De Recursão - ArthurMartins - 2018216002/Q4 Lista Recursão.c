@@ -1,11 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int somaVetor(int vetor[], int x) {
+int somarVetor(int vet[], int x){
 
-	if(n == 1) {
+	if(x == 1){
 
-		return vetor[0];
+		return vet[0];
+
 	}
 
-	return vetor[x - 1] + somaVetor(vet, x - 1);
+	return vet[x - 1] + somarVetor(vet, x - 1);
+}
+
+int main()
+{   
+	int vet[5] ={1,2,3,4,5};
+
+	int result;
+
+	result = somarVetor(vet, 5);
+
+	printf("\n%d", result);
+
+  	return 0;
+
+} 

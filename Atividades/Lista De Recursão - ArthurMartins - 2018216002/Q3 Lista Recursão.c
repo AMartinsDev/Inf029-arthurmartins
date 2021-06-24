@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//NÃO CONSEGUI COM RECURSÃO RENATO
+
 main(){
 
     int num, inverso = 0, aux;
